@@ -3,60 +3,62 @@ id: plugins
 title: Plugins
 ---
 
-Babel's code transformations are enabled by applying plugins (or [presets](presets.md)) to your [configuration file](config-files.md).
-
-<div id="pluginpreset-paths"></div>
+* ways to enable Babel's code transformations
+  * apply plugins | your [configuration file](config-files.md)
+  * apply [presets](presets.md)
 
 ## Using a Plugin
 
-If the plugin is on [npm](https://www.npmjs.com/search?q=babel-plugin), you can pass in the name of the plugin and Babel will check that it's installed in `node_modules`. This is added to the [plugins](options.md#presets) config option, which takes an array.
+* set | [plugins](options.md#presets) config option
+  * ways to specify
+    * name of the plugin
+      * plugin exists | [npm](https://www.npmjs.com/search?q=babel-plugin)
+      * Babel checks that it's installed | `node_modules`
+      * _Example:_
 
-```json title="babel.config.json"
-{
-  "plugins": ["babel-plugin-myPlugin", "@babel/plugin-transform-runtime"]
-}
-```
+        ```json title="babel.config.json"
+        {
+          "plugins": ["babel-plugin-myPlugin", "@babel/plugin-transform-runtime"]
+        }
+        ```
+    * relative/absolute path -- to -- your plugin
+      * see [name normalization](options.md#name-normalization)
+      * _Example:_
 
-You can also specify a relative/absolute path to your plugin.
-
-```json title="babel.config.json"
-{
-  "plugins": ["./node_modules/asdf/plugin"]
-}
-```
-
-See [name normalization](options.md#name-normalization) for more specifics on configuring the path of a plugin or preset.
+      ```json title="babel.config.json"
+      {
+        "plugins": ["./node_modules/asdf/plugin"]
+      }
+      ```
 
 ## Transform Plugins
 
-These plugins apply transformations to your code.
-
-:::info
-Transform plugins will enable the corresponding syntax plugin so you don't have to specify both.
-:::
+* == apply transformations | your code
+* 👀enable the corresponding syntax plugin 👀
+  * -> you do NOT have to specify BOTH
 
 ## Syntax Plugins
 
-Most syntax is transformable by Babel. In rarer cases (if the transform isn't implemented yet, or there isn't a default way to do so), you can use plugins such as `@babel/plugin-syntax-bigint` to only allow Babel to **parse** specific types of syntax. Or you want to preserve the source code because you only want Babel to do code analysis or codemods.
+* MOST syntax -- is transformable by -- Babel
+* | rarer cases, (_Example:_ transform is NOT implemented yet, or there is NOT a default way to do so)
+  * if you want ONLY allow Babel to parse specific types of syntax -> use specific plugins (_Example:_ `@babel/plugin-syntax-bigint`)
+  * if you want to preserve the source code
+    * _Example:_ ONLY want Babel to do code analysis or codemods
 
-:::tip
-You don't need to specify the syntax plugin if the corresponding transform plugin is used already, since it enables it automatically.
-:::
+* Babel parser's [`plugins` option](parser.md#plugins)
+  * _Example:_
 
-Alternatively, you can also provide any [`plugins` option](parser.md#plugins) from the Babel parser:
-
-Your `.babelrc`:
-
-```json title="JSON"
-{
-  "parserOpts": {
-    "plugins": ["jsx", "flow"]
+  ```json title="JSON, title=.babelrc.json"
+  {
+    "parserOpts": {
+      "plugins": ["jsx", "flow"]
+    }
   }
-}
-```
+  ```
 
 ## Plugin Ordering
 
+* TODO:
 > Ordering matters for each visitor in the plugin.
 
 This means if two transforms both visit the "Program" node, the transforms will run in either plugin or preset order.
