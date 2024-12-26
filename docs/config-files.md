@@ -5,7 +5,17 @@ id: config-files
 
 ## Configuration File Types
 
-Babel has two parallel config file formats, which can be used together, or independently.
+* Babel's config file formats
+  * uses
+    * together, or
+    * independently
+  * are
+    * Project-wide configuration
+      * `babel.config.*` files / allowed extensions are `.json`, `.js`, `.cjs`, `.mjs`, `.cts`
+    * File-relative configuration
+      * `.babelrc.*` files, / allowed extensions are `.json`, `.js`, `.cjs`, `.mjs`, `.cts`
+      * `.babelrc` file
+      * `package.json` files / has a `"babel"` key
 
 <details>
   <summary>History</summary>
@@ -17,34 +27,33 @@ Babel has two parallel config file formats, which can be used together, or indep
 | `v7.7.0`  | Support `.babelrc.json`, `.babelrc.cjs`, `babel.config.json`, `babel.config.cjs` |
 </details>
 
-- Project-wide configuration
-  - `babel.config.*` files, with the following extensions: `.json`, `.js`, `.cjs`, `.mjs`, `.cts`.
-- File-relative configuration
-  - `.babelrc.*` files, with the following extensions: `.json`, `.js`, `.cjs`, `.mjs`, `.cts`.
-  - `.babelrc` file, with no extension.
-  - `package.json` files, with a `"babel"` key.
-
 ## Project-wide configuration
 
-New in Babel 7.x, Babel has a concept of a ["root"](options.md#root) directory, which defaults
-to the current working directory. For project-wide configuration, Babel will automatically search
-for a `babel.config.json` file, or an equivalent one using the [supported extensions](#supported-file-extensions),
-in this root directory. Alternatively, users can use an explicit
-["configFile"](options.md#configfile) value to override the default config file search behavior.
+* | Babel v7.x,
+  * Babel's concept of a ["root/"](options.md#root) /
+    * defaults to the current working directory
+      * -> if the working directory != monorepo root -> painful to use | monorepos
+* Babel will search | root directory
+  * by default,
+    * `babel.config.json` or
+    * equivalent one -- using the -- [supported extensions](#supported-file-extensions)
+  * if you specify ["configFile"](options.md#configfile)
+    * -> will search for that one / specified
+    * & set `false` -> disabled
 
-Because project-wide config files are separated from the physical location of the config
-file, they can be ideal for configuration that must apply broadly, even allowing
-plugins and presets to easily apply to files in `node_modules` or in symlinked packages,
-which were traditionally quite painful to configure in Babel 6.x.
+* use cases
+  * configuration / apply broadly,
+    * ALTHOUGH allowing plugins & presets / apply |
+      * `node_modules`' files or
+      * symlinked packages
+        * quite painful to configure | Babel 6.x.
+    * Reason: 🧠 project-wide config files -- are separated from the -- physical location of the config file 🧠
 
-The primary downside of this project-wide config is that, because it relies on the working
-directory, it can be more painful to use in monorepos if the working directory is not the monorepo root.
-See the [monorepo](#monorepos) documentation for examples of how to use config files in that context.
-
-Project-wide configs can also be disabled by setting ["configFile"](options.md#configfile) to `false`.
+* see [monorepo](#monorepos)
 
 ## File-relative configuration
 
+* TODO:
 Babel loads `.babelrc.json` files, or an equivalent one using the [supported extensions](#supported-file-extensions), by searching up the
 directory structure starting from the ["filename"](options.md#filename) being compiled (limited by the caveats below).
 This can be powerful because it allows you to create independent configurations for subsections of
