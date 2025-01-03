@@ -12,29 +12,15 @@ sidebar_label: Common JS
 | `v7.14.0` | Implemented the `importInterop` option |
 </details>
 
-:::info
-This plugin is included in `@babel/preset-env` under the `modules` option
-:::
-
-This plugin transforms ECMAScript modules to [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1). Note that only the _syntax_ of import/export statements (`import "./mod.js"`) and import expressions (`import('./mod.js')`) is transformed, as Babel is unaware of different resolution algorithms between implementations of ECMAScript modules and CommonJS.
+* included | `@babel/preset-env`'s `modules` option
+* 👀ECMAScript modules -- are transformed to -- [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) 👀
+  * ⚠️ONLY transform ⚠️ -- Reason: 🧠Babel is unaware of differences between ECMAScript modules' resolution algorithms vs CommonJS's resolution algorithms 🧠
+    * import/export statements (`import "./mod.js"`)
+    * import expressions (`import('./mod.js')`)
 
 ## Example
 
-**In**
-
-```js title="JavaScript"
-export default 42;
-```
-
-**Out**
-
-```js title="JavaScript"
-Object.defineProperty(exports, "__esModule", {
-  value: true,
-});
-
-exports.default = 42;
-```
+* [here](samples/plugins/transform-modules-commonjs)
 
 ## Installation
 
@@ -46,6 +32,7 @@ npm install --save-dev @babel/plugin-transform-modules-commonjs
 
 ### With a configuration file (Recommended)
 
+* TODO:
 ```js title="JavaScript"
 // without options
 {
